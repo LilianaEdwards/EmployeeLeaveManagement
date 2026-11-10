@@ -1,0 +1,11 @@
+@EmployeeService_HostAddress = http://localhost:5076
+
+GET {{EmployeeService_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+
+GET {{EmployeeService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

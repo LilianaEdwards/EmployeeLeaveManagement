@@ -1,0 +1,95 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="login-flow" name="Login Process Flow">
+    <mxGraphModel dx="2142" dy="1177" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#1F2937;" value="Employee Leave Management System Login Process Flow" vertex="1">
+          <mxGeometry height="40" width="640" x="230" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="start" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F3F4F6;strokeColor=#64748B;fontStyle=1;fontSize=14;fontColor=#1F2937;" value="START" vertex="1">
+          <mxGeometry height="55" width="150" x="475" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="login" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#3B82F6;fontColor=#1E3A8A;fontStyle=1;fontSize=14;spacing=10;" value="Login Page (Razor)&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;User enters email and password&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="320" x="390" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="controller" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#8B5CF6;fontColor=#4C1D95;fontStyle=1;fontSize=14;spacing=10;" value="AccountController&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Receives POST /Account/Login&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="320" x="390" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#8B5CF6;fontColor=#4C1D95;fontStyle=1;fontSize=14;spacing=10;" value="Authentication Logic&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Find account by email (using EF Core)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="320" x="390" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="db" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#DCFCE7;strokeColor=#22A06B;fontColor=#14532D;fontStyle=1;fontSize=14;spacing=8;" value="SQL SERVER DATABASE&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Users table: retrieve user record and PasswordHash&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="320" x="390" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="verify" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#78350F;fontStyle=1;fontSize=14;spacing=10;" value="Verify Password&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Compare entered password with stored hash&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="320" x="390" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="decision" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#78350F;fontStyle=1;fontSize=14;" value="Password valid?" vertex="1">
+          <mxGeometry height="100" width="170" x="465" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="session" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#22A06B;fontColor=#14532D;fontStyle=1;fontSize=13;spacing=8;" value="Create Authentication Session&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Sign in using authentication cookie&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="300" x="115" y="965" as="geometry" />
+        </mxCell>
+        <mxCell id="dashboard" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#22A06B;fontColor=#14532D;fontStyle=1;fontSize=14;spacing=8;" value="Redirect to Dashboard" vertex="1">
+          <mxGeometry height="65" width="300" x="115" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;fontColor=#7F1D1D;fontStyle=1;fontSize=13;spacing=8;" value="Show Error Message&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Invalid email or password&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="300" x="685" y="965" as="geometry" />
+        </mxCell>
+        <mxCell id="return" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;fontColor=#7F1D1D;fontStyle=1;fontSize=14;spacing=8;" value="Return to Login Page" vertex="1">
+          <mxGeometry height="65" width="300" x="685" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="note" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=18;fillColor=#FFF7ED;strokeColor=#FB923C;fontColor=#7C2D12;fontSize=12;align=left;spacing=8;" value="Security note: Never store plain-text passwords. Store a salted password hash and verify it with a password-hashing API." vertex="1">
+          <mxGeometry height="95" width="260" x="745" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#64748B;" target="login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#64748B;" target="controller">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="controller" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#64748B;" target="auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#64748B;fontSize=11;labelBackgroundColor=#FFFFFF;" target="db" value="Query user by email">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#64748B;fontSize=11;labelBackgroundColor=#FFFFFF;" target="verify" value="User record + hash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="verify" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#64748B;" target="decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#16A34A;fontStyle=1;fontColor=#15803D;fontSize=13;labelBackgroundColor=#FFFFFF;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" target="session" value="YES">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="265" y="935" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="session" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#16A34A;" target="dashboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#DC2626;fontStyle=1;fontColor=#B91C1C;fontSize=13;labelBackgroundColor=#FFFFFF;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" target="error" value="NO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="835" y="935" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="error" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#DC2626;" target="return">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="return" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11;fontColor=#B91C1C;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" target="login" value="Try again">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="1122" />
+              <mxPoint x="1040" y="252" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

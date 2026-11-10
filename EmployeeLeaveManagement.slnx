@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Contracts/Contracts.csproj" />
+    <Project Path="src/EmployeeService/EmployeeService.csproj" />
+    <Project Path="src/LeaveService/LeaveService.csproj" />
+    <Project Path="src/NotificationService/NotificationService.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EmployeeService.UnitTests/EmployeeService.UnitTests.csproj" />
+    <Project Path="tests/LeaveService.UnitTests/LeaveService.UnitTests.csproj" />
+    <Project Path="tests/NotificationService.UnitTests/NotificationService.UnitTests.csproj" />
+  </Folder>
+</Solution>

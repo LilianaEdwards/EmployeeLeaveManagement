@@ -1,0 +1,72 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="pQ7HhDzKptsz-xr6f6hH">
+    <mxGraphModel dx="1414" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;\nflowchart LR\n    subgraph ES[\&quot;EmployeeService — EmployeeDb\&quot;]\n        direction TB\n        E[\&quot;EMPLOYEES&lt;br/&gt;━━━━━━━━━━━━&lt;br/&gt;PK Id : uniqueidentifier&lt;br/&gt;FullName : nvarchar(100)&lt;br/&gt;Email : nvarchar(254) UNIQUE&lt;br/&gt;Department : nvarchar(100)&lt;br/&gt;PasswordHash : nvarchar(500) NULL&lt;br/&gt;Role : nvarchar(30)\&quot;]\n    end\n\n    subgraph LS[\&quot;LeaveService — LeaveDb\&quot;]\n        direction TB\n        L[\&quot;LEAVE REQUESTS&lt;br/&gt;━━━━━━━━━━━━&lt;br/&gt;PK Id : uniqueidentifier&lt;br/&gt;EmployeeId : uniqueidentifier&lt;br/&gt;Type : int&lt;br/&gt;StartDate : date&lt;br/&gt;EndDate : date&lt;br/&gt;Reason : string&lt;br/&gt;Status : int&lt;br/&gt;CreatedAtUtc : datetime2&lt;br/&gt;ReviewedAtUtc : datetime2 NULL&lt;br/&gt;ReviewedByEmployeeId : uniqueidentifier NULL&lt;br/&gt;ReviewComment : string NULL\&quot;]\n    end\n\n    E -.-&gt;|\&quot;Employee information lookup\&quot;| API[\&quot;EmployeeService Internal API\&quot;]\n    API -.-&gt;|\&quot;HTTP request / response\&quot;| L\n\n    T[\&quot;LeaveType enum&lt;br/&gt;Annual = 0&lt;br/&gt;Sick = 1&lt;br/&gt;Paid = 2&lt;br/&gt;Unpaid = 3\&quot;]\n    S[\&quot;LeaveStatus enum&lt;br/&gt;Pending = 0&lt;br/&gt;Approved = 1&lt;br/&gt;Rejected = 2\&quot;]\n\n    T -.-&gt; L\n    S -.-&gt; L\n\n    classDef employee fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A\n    classDef leave fill:#DCFCE7,stroke:#16A34A,color:#14532D\n    classDef api fill:#FEF3C7,stroke:#D97706,color:#78350F\n    classDef enums fill:#F3E8FF,stroke:#9333EA,color:#581C87\n\n    class E employee\n    class L leave\n    class API api\n    class T,S enums\n&quot;,&#xa;  &quot;config&quot;: null,&#xa;  &quot;version&quot;: &quot;12&quot;&#xa;}" id="4BJcFBt3KcR1Z1oBFXeZ-5">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="LeaveService — LeaveDb" mermaidId="n:LS" mermaidBaseStyle="html=1;whiteSpace=nowrap;strokeWidth=1;verticalAlign=top;fillColor=#F0FDFA;strokeColor=#2DD4BF;fontColor=#000000;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;" mermaidBaseValue="LeaveService — LeaveDb" id="4BJcFBt3KcR1Z1oBFXeZ-6">
+          <mxCell parent="4BJcFBt3KcR1Z1oBFXeZ-5" style="html=1;whiteSpace=nowrap;strokeWidth=1;verticalAlign=top;fillColor=#F0FDFA;strokeColor=#2DD4BF;fontColor=#000000;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" vertex="1">
+            <mxGeometry height="547" width="220" x="1120" y="210" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="LEAVE REQUESTS&#xa;━━━━━━━━━━━━&#xa;PK Id : uniqueidentifier&#xa;EmployeeId : uniqueidentifier&#xa;Type : int&#xa;StartDate : date&#xa;EndDate : date&#xa;Reason : string&#xa;Status : int&#xa;CreatedAtUtc : datetime2&#xa;ReviewedAtUtc : datetime2 NULL&#xa;ReviewedByEmployeeId : uniqueidentifier NULL&#xa;ReviewComment : string NULL" mermaidId="n:L" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#14532D;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;" mermaidBaseValue="LEAVE REQUESTS&#xa;━━━━━━━━━━━━&#xa;PK Id : uniqueidentifier&#xa;EmployeeId : uniqueidentifier&#xa;Type : int&#xa;StartDate : date&#xa;EndDate : date&#xa;Reason : string&#xa;Status : int&#xa;CreatedAtUtc : datetime2&#xa;ReviewedAtUtc : datetime2 NULL&#xa;ReviewedByEmployeeId : uniqueidentifier NULL&#xa;ReviewComment : string NULL" id="4BJcFBt3KcR1Z1oBFXeZ-7">
+          <mxCell parent="4BJcFBt3KcR1Z1oBFXeZ-6" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#14532D;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;labelWidth=120;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" vertex="1">
+            <mxGeometry height="472.55" width="200" x="10" y="50" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="EmployeeService — EmployeeDb" mermaidId="n:ES" mermaidBaseStyle="html=1;whiteSpace=nowrap;strokeWidth=1;verticalAlign=top;fillColor=#FDF4FF;strokeColor=#E879F9;fontColor=#000000;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;" mermaidBaseValue="EmployeeService — EmployeeDb" id="4BJcFBt3KcR1Z1oBFXeZ-8">
+          <mxCell parent="4BJcFBt3KcR1Z1oBFXeZ-5" style="html=1;whiteSpace=nowrap;strokeWidth=1;verticalAlign=top;fillColor=#FDF4FF;strokeColor=#E879F9;fontColor=#000000;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" vertex="1">
+            <mxGeometry height="442" width="238" x="40" y="143" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="EMPLOYEES&#xa;━━━━━━━━━━━━&#xa;PK Id : uniqueidentifier&#xa;FullName : nvarchar(100)&#xa;Email : nvarchar(254) UNIQUE&#xa;Department : nvarchar(100)&#xa;PasswordHash : nvarchar(500) NULL&#xa;Role : nvarchar(30)" mermaidId="n:E" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#1E3A8A;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;" mermaidBaseValue="EMPLOYEES&#xa;━━━━━━━━━━━━&#xa;PK Id : uniqueidentifier&#xa;FullName : nvarchar(100)&#xa;Email : nvarchar(254) UNIQUE&#xa;Department : nvarchar(100)&#xa;PasswordHash : nvarchar(500) NULL&#xa;Role : nvarchar(30)" id="4BJcFBt3KcR1Z1oBFXeZ-9">
+          <mxCell parent="4BJcFBt3KcR1Z1oBFXeZ-8" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#1E3A8A;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;labelWidth=120;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" vertex="1">
+            <mxGeometry height="380" width="190" x="20" y="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="EmployeeService Internal API" mermaidId="n:API" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#78350F;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;" mermaidBaseValue="EmployeeService Internal API" id="4BJcFBt3KcR1Z1oBFXeZ-10">
+          <mxCell parent="4BJcFBt3KcR1Z1oBFXeZ-5" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#78350F;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;labelWidth=120;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" vertex="1">
+            <mxGeometry height="67" width="152" x="560" y="347" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="LeaveType enum&#xa;Annual = 0&#xa;Sick = 1&#xa;Paid = 2&#xa;Unpaid = 3" mermaidId="n:T" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#581C87;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;" mermaidBaseValue="LeaveType enum&#xa;Annual = 0&#xa;Sick = 1&#xa;Paid = 2&#xa;Unpaid = 3" id="4BJcFBt3KcR1Z1oBFXeZ-11">
+          <mxCell parent="4BJcFBt3KcR1Z1oBFXeZ-5" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#581C87;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" vertex="1">
+            <mxGeometry height="129" width="152" x="730" y="431.78" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="LeaveStatus enum&#xa;Pending = 0&#xa;Approved = 1&#xa;Rejected = 2" mermaidId="n:S" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#581C87;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;" mermaidBaseValue="LeaveStatus enum&#xa;Pending = 0&#xa;Approved = 1&#xa;Rejected = 2" id="4BJcFBt3KcR1Z1oBFXeZ-12">
+          <mxCell parent="4BJcFBt3KcR1Z1oBFXeZ-5" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#581C87;fontFamily=Recursive;fontSize=14;shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;labelWidth=120;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" vertex="1">
+            <mxGeometry height="129" width="152" x="730" y="638" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Employee information lookup" mermaidId="e:E-&gt;API#0" mermaidBaseStyle="edgeStyle=orthogonalEdgeStyle;rounded=1;curved=0;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;html=1;fontSize=16;labelBackgroundColor=#cccccc;fontFamily=Recursive;fontColor=#28253D;exitX=1;exitY=0.5;entryX=0;entryY=0.49;strokeWidth=2;targetPerimeterSpacing=4;" mermaidBaseValue="Employee information lookup" id="4BJcFBt3KcR1Z1oBFXeZ-13">
+          <mxCell edge="1" parent="4BJcFBt3KcR1Z1oBFXeZ-5" source="4BJcFBt3KcR1Z1oBFXeZ-9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;curved=0;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;html=1;fontSize=14;labelBackgroundColor=#cccccc;fontFamily=Recursive;fontColor=#28253D;exitX=1;exitY=0.5;entryX=0;entryY=0.49;strokeWidth=2;targetPerimeterSpacing=4;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" target="4BJcFBt3KcR1Z1oBFXeZ-10">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="HTTP request / response" mermaidId="e:API-&gt;L#0" mermaidBaseStyle="edgeStyle=orthogonalEdgeStyle;rounded=1;curved=0;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;html=1;fontSize=16;labelBackgroundColor=#cccccc;fontFamily=Recursive;fontColor=#28253D;exitX=1;exitY=0.49;entryX=0;entryY=0.26;strokeWidth=2;targetPerimeterSpacing=4;" mermaidBaseValue="HTTP request / response" id="4BJcFBt3KcR1Z1oBFXeZ-14">
+          <mxCell edge="1" parent="4BJcFBt3KcR1Z1oBFXeZ-5" source="4BJcFBt3KcR1Z1oBFXeZ-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;html=1;fontSize=14;labelBackgroundColor=#cccccc;fontFamily=Recursive;fontColor=#28253D;exitX=1;exitY=0.49;entryX=0;entryY=0.26;strokeWidth=2;targetPerimeterSpacing=4;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;" target="4BJcFBt3KcR1Z1oBFXeZ-7">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:T-&gt;L#0" mermaidBaseStyle="edgeStyle=orthogonalEdgeStyle;rounded=1;curved=0;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;targetPerimeterSpacing=4;" mermaidBaseValue="" id="4BJcFBt3KcR1Z1oBFXeZ-15">
+          <mxCell edge="1" parent="4BJcFBt3KcR1Z1oBFXeZ-5" source="4BJcFBt3KcR1Z1oBFXeZ-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;targetPerimeterSpacing=4;" target="4BJcFBt3KcR1Z1oBFXeZ-7">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:S-&gt;L#0" mermaidBaseStyle="edgeStyle=orthogonalEdgeStyle;rounded=1;curved=0;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.74;strokeWidth=2;targetPerimeterSpacing=4;" mermaidBaseValue="" id="4BJcFBt3KcR1Z1oBFXeZ-16">
+          <mxCell edge="1" parent="4BJcFBt3KcR1Z1oBFXeZ-5" source="4BJcFBt3KcR1Z1oBFXeZ-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;dashPattern=2 2;fixDash=1;startArrow=none;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;strokeColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.74;strokeWidth=2;targetPerimeterSpacing=4;" target="4BJcFBt3KcR1Z1oBFXeZ-7">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

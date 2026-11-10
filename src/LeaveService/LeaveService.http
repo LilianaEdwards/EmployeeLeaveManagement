@@ -1,0 +1,11 @@
+@LeaveService_HostAddress = http://localhost:5080
+
+GET {{LeaveService_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+
+GET {{LeaveService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

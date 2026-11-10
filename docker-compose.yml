@@ -1,0 +1,86 @@
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: elms-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:?Set MSSQL_SA_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:1434:1433"
+    volumes:
+      - elms-sql-data:/var/opt/mssql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+    restart: unless-stopped
+
+  employeeservice:
+    build:
+      context: .
+      dockerfile: src/EmployeeService/Dockerfile
+    container_name: elms-employee-service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+      HttpsRedirection__Enabled: "false"
+      ConnectionStrings__EmployeeDatabase: "Server=sqlserver,1433;Database=EmployeeDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};Encrypt=True;TrustServerCertificate=True"
+      Jwt__Key: ${JWT_KEY:?Set JWT_KEY in .env}
+      Jwt__Issuer: ${JWT_ISSUER:-EmployeeLeaveManagement}
+      Jwt__Audience: ${JWT_AUDIENCE:-EmployeeLeaveManagement}
+      ServiceAuthentication__ApiKey: ${SERVICE_API_KEY:?Set SERVICE_API_KEY in .env}
+      BootstrapHod__FullName: ${BOOTSTRAP_HOD_FULL_NAME:?Set BOOTSTRAP_HOD_FULL_NAME in .env}
+      BootstrapHod__Email: ${BOOTSTRAP_HOD_EMAIL:?Set BOOTSTRAP_HOD_EMAIL in .env}
+      BootstrapHod__Department: ${BOOTSTRAP_HOD_DEPARTMENT:?Set BOOTSTRAP_HOD_DEPARTMENT in .env}
+      BootstrapHod__Password: ${BOOTSTRAP_HOD_PASSWORD:?Set BOOTSTRAP_HOD_PASSWORD in .env}
+    ports:
+      - "5076:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    restart: unless-stopped
+
+  leaveservice:
+    build:
+      context: .
+      dockerfile: src/LeaveService/Dockerfile
+    container_name: elms-leave-service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+      HttpsRedirection__Enabled: "false"
+      ConnectionStrings__LeaveDatabase: "Server=sqlserver,1433;Database=LeaveDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};Encrypt=True;TrustServerCertificate=True"
+      Jwt__Key: ${JWT_KEY:?Set JWT_KEY in .env}
+      Jwt__Issuer: ${JWT_ISSUER:-EmployeeLeaveManagement}
+      Jwt__Audience: ${JWT_AUDIENCE:-EmployeeLeaveManagement}
+      ServiceAuthentication__ApiKey: ${SERVICE_API_KEY:?Set SERVICE_API_KEY in .env}
+      Services__EmployeeService__BaseUrl: http://employeeservice:8080
+    ports:
+      - "5080:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      employeeservice:
+        condition: service_started
+    restart: unless-stopped
+
+  notificationservice:
+    build:
+      context: .
+      dockerfile: src/NotificationService/Dockerfile
+    container_name: elms-notification-service
+    environment:
+      DOTNET_ENVIRONMENT: Development
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  elms-sql-data:

@@ -1,0 +1,61 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# .NET build outputs
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Test results
+**/TestResults/
+
+# Docker
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Node.js dependencies
+**/node_modules/
+
+# Frontend build outputs
+**/dist/
+**/coverage/
+
+# Frontend tooling caches
+**/.vite/
+**/.turbo/
+
+# IDE
+.idea/
+
+# Database backups
+*.bak
+
+# Node.js dependencies
+**/node_modules/
+
+# Frontend build outputs
+**/dist/
+**/coverage/
+
+# Frontend tooling caches
+**/.vite/
+**/.turbo/
+
+# IDE
+.idea/
+
+# Database backups
+*.bak
+
+# Temporary diagnostic output
+/test-errors.txt
