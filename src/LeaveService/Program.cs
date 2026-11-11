@@ -50,10 +50,35 @@ builder.Services.AddSwaggerGen(options =>
             }
         });
 });
+
+var databaseProvider =
+    builder.Configuration["DatabaseProvider"] ?? "SqlServer";
+
+var leaveConnectionString =
+    builder.Configuration.GetConnectionString("LeaveDatabase")
+    ?? throw new InvalidOperationException(
+        "LeaveDatabase connection string is not configured.");
+
 builder.Services.AddDbContext<LeaveDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString(
-            "LeaveDatabase")));
+{
+    if (databaseProvider.Equals(
+        "PostgreSQL",
+        StringComparison.OrdinalIgnoreCase))
+    {
+        options.UseNpgsql(leaveConnectionString);
+    }
+    else if (databaseProvider.Equals(
+        "SqlServer",
+        StringComparison.OrdinalIgnoreCase))
+    {
+        options.UseSqlServer(leaveConnectionString);
+    }
+    else
+    {
+        throw new InvalidOperationException(
+            $"Unsupported database provider: {databaseProvider}");
+    }
+});
 
 builder.Services.AddScoped<LeaveManager>();
 
@@ -96,6 +121,7 @@ builder.Services
                 RoleClaimType = ClaimTypes.Role
             };
     });
+
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
@@ -113,6 +139,7 @@ if (builder.Configuration.GetValue<bool>(
 {
     app.UseHttpsRedirection();
 }
+
 app.UseAuthentication();
 app.UseAuthorization();
 

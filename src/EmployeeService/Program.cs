@@ -48,10 +48,36 @@ builder.Services.AddSwaggerGen(options =>
                 new List<string>()
             }
         });
-}); builder.Services.AddDbContext<EmployeeDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString(
-            "EmployeeDatabase")));
+});
+
+var databaseProvider =
+    builder.Configuration["DatabaseProvider"] ?? "SqlServer";
+
+var employeeConnectionString =
+    builder.Configuration.GetConnectionString("EmployeeDatabase")
+    ?? throw new InvalidOperationException(
+        "EmployeeDatabase connection string is not configured.");
+
+builder.Services.AddDbContext<EmployeeDbContext>(options =>
+{
+    if (databaseProvider.Equals(
+        "PostgreSQL",
+        StringComparison.OrdinalIgnoreCase))
+    {
+        options.UseNpgsql(employeeConnectionString);
+    }
+    else if (databaseProvider.Equals(
+        "SqlServer",
+        StringComparison.OrdinalIgnoreCase))
+    {
+        options.UseSqlServer(employeeConnectionString);
+    }
+    else
+    {
+        throw new InvalidOperationException(
+            $"Unsupported database provider: {databaseProvider}");
+    }
+});
 
 builder.Services.AddScoped<EmployeeManager>();
 builder.Services.AddScoped<PasswordService>();
@@ -105,9 +131,11 @@ builder.Services.AddAuthorization(options =>
                 "leave-service");
     });
 });
+
 var app = builder.Build();
 
 await ApplyDatabaseMigrationsAsync(app);
+
 using (var scope = app.Services.CreateScope())
 {
     var hodProvisioner = scope.ServiceProvider
@@ -127,6 +155,7 @@ if (builder.Configuration.GetValue<bool>(
 {
     app.UseHttpsRedirection();
 }
+
 app.UseAuthentication();
 app.UseAuthorization();
 

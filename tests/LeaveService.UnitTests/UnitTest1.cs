@@ -661,7 +661,14 @@ public class LeaveManagerTests
             startDate = startDate.AddDays(1);
         }
 
-        var endDate = startDate.AddDays(2);
+        // Find an end date that gives exactly three working days.
+        var endDate = startDate;
+
+        while (LeaveDayCalculator.CountWorkingDays(
+            startDate, endDate) < 3)
+        {
+            endDate = endDate.AddDays(1);
+        }
 
         var request = new CreateLeaveRequestDto
         {
