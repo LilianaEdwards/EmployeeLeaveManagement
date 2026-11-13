@@ -72,6 +72,8 @@ jobs:
           file: ./src/EmployeeService/Dockerfile
           push: false
           tags: leaveflow-employee-service:ci
+          build-args: |
+            DatabaseProvider=PostgreSQL
 
       - name: Build LeaveService image
         uses: docker/build-push-action@v6
@@ -80,6 +82,8 @@ jobs:
           file: ./src/LeaveService/Dockerfile
           push: false
           tags: leaveflow-leave-service:ci
+          build-args: |
+            DatabaseProvider=PostgreSQL
 
       - name: Build NotificationService image
         uses: docker/build-push-action@v6
@@ -135,6 +139,8 @@ jobs:
           push: true
           tags: ${{ steps.meta-employee.outputs.tags }}
           labels: ${{ steps.meta-employee.outputs.labels }}
+          build-args: |
+            DatabaseProvider=PostgreSQL
 
       - name: Generate LeaveService image tags
         id: meta-leave
@@ -154,6 +160,8 @@ jobs:
           push: true
           tags: ${{ steps.meta-leave.outputs.tags }}
           labels: ${{ steps.meta-leave.outputs.labels }}
+          build-args: |
+            DatabaseProvider=PostgreSQL
 
       - name: Generate NotificationService image tags
         id: meta-notification

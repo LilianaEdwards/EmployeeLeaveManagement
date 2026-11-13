@@ -5,6 +5,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <DatabaseProvider Condition="'$(DatabaseProvider)' == ''">SqlServer</DatabaseProvider>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +22,11 @@
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="9.0.21" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(DatabaseProvider)' == 'SqlServer'">
+    <Compile Remove="Data\Migrations\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(DatabaseProvider)' == 'PostgreSQL'">
     <Compile Remove="Data\SqlServerMigrations\**\*.cs" />
   </ItemGroup>
 
