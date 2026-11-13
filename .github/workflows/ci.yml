@@ -1,4 +1,5 @@
-﻿name: LeaveFlow CI
+﻿
+name: LeaveFlow CI
 
 on:
   push:
@@ -52,3 +53,38 @@ jobs:
       - name: Build React frontend
         working-directory: frontend
         run: npm run build
+
+  docker-build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build EmployeeService image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./src/EmployeeService/Dockerfile
+          push: false
+          tags: leaveflow-employee-service:ci
+
+      - name: Build LeaveService image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./src/LeaveService/Dockerfile
+          push: false
+          tags: leaveflow-leave-service:ci
+
+      - name: Build NotificationService image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./src/NotificationService/Dockerfile
+          push: false
+          tags: leaveflow-notification-service:ci
